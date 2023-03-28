@@ -1,9 +1,12 @@
 import { Funko } from "./funko";
+import chalk from "chalk";
 
 /**
  * Clase que representa a un usuario que tiene una colección de funko pops.
  */
 export class User {
+    private log = console.log
+
     /**
      * Constructor de clase.
      * @param _id Id del usuario.
@@ -33,32 +36,38 @@ export class User {
         return this._funkoCollection;
     }
 
-    addFunko(newFunko: Funko) {
+    addFunko(newFunko: Funko): number {
         if(this._funkoCollection.find(funko => funko.id == newFunko.id) == undefined) {
             this.funkoCollection.push(newFunko);
-            //Emitir mensaje bien
+            this.log(chalk.green("Funko añadido correctamente!"));
+            return 0;
         } else {
-            //Emitir mensaje error
+            this.log(chalk.red("ERROR: Ya existe un funko con esa ID."));
+            return -1;
         }
     }
 
-    modifyFunko(newFunko: Funko) {
+    modifyFunko(newFunko: Funko): number {
         const position = this._funkoCollection.findIndex(funko => funko.id == newFunko.id);
         if(position != -1) {
             this.funkoCollection[position] = newFunko;
-            //Emitir mensaje bien
+            this.log(chalk.green("Funko modificado correctamente!"));
+            return 0;
         } else {
-            //Emitir mensaje error
+            this.log(chalk.red("ERROR: No existe un funko con esa ID."));
+            return -1;
         }
     }
 
-    deleteFunko(idFunko: number) {
+    deleteFunko(idFunko: number): number {
         const position = this._funkoCollection.findIndex(funko => funko.id == idFunko);
         if(position != -1) {
             this.funkoCollection.splice(position, 1);
-            //Emitir mensaje bien
+            this.log(chalk.green("Funko eliminado correctamente!"));
+            return 0;
         } else {
-            //Emitir mensaje error
+            this.log(chalk.red("ERROR: No existe un funko con esa ID."));
+            return -1;
         }
     }
 

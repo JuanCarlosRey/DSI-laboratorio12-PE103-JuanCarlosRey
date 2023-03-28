@@ -21,21 +21,15 @@ describe("Class User", () => {
         expect(user.funkoCollection).to.deep.equal([funko_1, funko_2]);
     });
     it("addFunko()", () => {
-        user.addFunko(funko_1);
-        expect(user.funkoCollection).to.deep.equal([funko_1, funko_2]);
-        user.addFunko(funko_3);
-        expect(user.funkoCollection).to.deep.equal([funko_1, funko_2, funko_3]);
+        expect(user.addFunko(funko_1)).to.equal(-1);
+        expect(user.addFunko(funko_3)).to.equal(0);
     });
     it("modifyFunko()", () => {
-        user.modifyFunko(new_funko_1)
-        expect(user.funkoCollection).to.deep.equal([new_funko_1, funko_2, funko_3]);
-        user.modifyFunko(funko_4)
-        expect(user.funkoCollection).to.deep.equal([new_funko_1, funko_2, funko_3]);
+        expect(user.modifyFunko(new_funko_1)).to.equal(0);
+        expect(user.modifyFunko(funko_4)).to.equal(-1);
     });
     it("deleteFunko()", () => {
-        user.deleteFunko(1)
-        expect(user.funkoCollection).to.deep.equal([funko_2, funko_3]);
-        user.deleteFunko(4)
-        expect(user.funkoCollection).to.deep.equal([funko_2, funko_3]);
+        expect(user.deleteFunko(1)).to.equal(0)
+        expect(user.deleteFunko(4)).to.equal(-1)
     });
 });
