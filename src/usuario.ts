@@ -36,6 +36,11 @@ export class User {
         return this._funkoCollection;
     }
 
+    /**
+     * Añade un funko a la colección de funkos del usuario.
+     * @param newFunko Nuevo funko a añadir.
+     * @returns 0 si la operación ha salido correctamente o -1 si hubo algun error.
+     */
     addFunko(newFunko: Funko): number {
         if(this._funkoCollection.find(funko => funko.id == newFunko.id) == undefined) {
             this.funkoCollection.push(newFunko);
@@ -47,6 +52,11 @@ export class User {
         }
     }
 
+    /**
+     * Modifica un funko de la lista de funkos del usuario.
+     * @param newFunko Nuevo funko a añadir. Debe tener un ID que tambien lo tenga algun funko de la colección.
+     * @returns 0 si la operación ha salido correctamente o -1 si hubo algun error.
+     */
     modifyFunko(newFunko: Funko): number {
         const position = this._funkoCollection.findIndex(funko => funko.id == newFunko.id);
         if(position != -1) {
@@ -59,6 +69,11 @@ export class User {
         }
     }
 
+    /**
+     * Elimina un funko de la lista de funkos del usuario.
+     * @param idFunko Id del funko a eliminar.
+     * @returns 0 si la operación ha salido correctamente y -1 si hubo algun error.
+     */
     deleteFunko(idFunko: number): number {
         const position = this._funkoCollection.findIndex(funko => funko.id == idFunko);
         if(position != -1) {
@@ -71,6 +86,9 @@ export class User {
         }
     }
 
+    /**
+     * Muestra la lista de funkos del usuario, junto a la infomración detallada de cada uno.
+     */
     listFunko() {
         this._funkoCollection.forEach((funko) => {
             console.log("----------------------------------")
@@ -83,10 +101,14 @@ export class User {
             console.log("Número: " + funko.number);
             console.log("Exlusivo: " + funko.exclusive);
             console.log("Características: " + funko.specialCharacteristics);
-            // Rangos de mercado
+            
         });
     }
 
+    /**
+     * Muestra la información detallada de un funko de la colección.
+     * @param idFunko Id del funko del que se quiere mostrar la información.
+     */
     showFunkoInfo(idFunko: number) {
         // La cosa con el modulo ese
     }
