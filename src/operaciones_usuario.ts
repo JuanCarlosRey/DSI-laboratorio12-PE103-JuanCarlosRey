@@ -98,6 +98,7 @@ export class OperableUser extends User {
     showFunkoInfo(idFunko: number): number {
         const index = this.funkoCollection.findIndex(funko => funko.id == idFunko);
         if(index != -1) {
+            console.log("----------------------------------")
             console.log(`ID: ${this.funkoCollection[index].id}`);
             console.log(`Nombre: ${this.funkoCollection[index].name}`);
             console.log(`Descripcion:  + ${this.funkoCollection[index].description}`);
