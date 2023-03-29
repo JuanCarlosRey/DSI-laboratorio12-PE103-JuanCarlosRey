@@ -72,7 +72,19 @@ export class User {
     }
 
     listFunko() {
-        // La cosa con el modulo ese
+        this._funkoCollection.forEach((funko) => {
+            console.log("----------------------------------")
+            console.log("ID: " + funko.id);
+            console.log("Nombre: " + funko.name);
+            console.log("Descripcion: " + funko.description);
+            console.log("Tipo: " + funko.type);
+            console.log("Género: " + funko.gender);
+            console.log("Franquicia: " + funko.franchise);
+            console.log("Número: " + funko.number);
+            console.log("Exlusivo: " + funko.exclusive);
+            console.log("Características: " + funko.specialCharacteristics);
+            // Rangos de mercado
+        });
     }
 
     showFunkoInfo(idFunko: number) {
