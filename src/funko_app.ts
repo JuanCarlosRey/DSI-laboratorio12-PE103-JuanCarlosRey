@@ -1,7 +1,7 @@
 import { Funko, Types } from "./funko";
 import { OperableUser } from "./operaciones_usuario";
 import chalk from "chalk";
-import yargs, { help } from "yargs";
+import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import fs from 'fs';
 const log = console.log;
@@ -13,7 +13,7 @@ const userList: OperableUser[] = [];
  * Función que permite cargar los funkos desde los diferentes ficheros JSON almacenados
  * en el directorio del usuario correspondiente.
  */
-function databaseLoad() {
+export function databaseLoad() {
     let id = 0;
 
     fs.readdirSync("./data").forEach(user => {
@@ -40,7 +40,7 @@ function databaseLoad() {
  * Funcion que guarda cada funko registrado en un fichero independiente con formato JSON.
  * Cada fichero se almacena en el directorio del dueño del funko.
  */
-function databaseSave() {
+export function databaseSave() {
     userList.forEach(user => {
         fs.readdirSync("./data").forEach(folder => {
             if(folder == user.name) {
@@ -68,7 +68,7 @@ yargs(hideBin(process.argv))
     // Añade un nuevo usuario al sistema
     .command('adduser', 'adds a new user', {
         username: {
-            description: 'Funko owner',
+            description: 'New user',
             type: 'string',
             demandOption: true
         },
@@ -88,57 +88,57 @@ yargs(hideBin(process.argv))
     // Comando para añadir un nuevo funko a la lista del usuario.
     .command('add', 'adds a funko', {
         user: {
-            description: 'Funko owner',
+            description: 'New funko owner',
             type: 'string',
             demandOption: true
         },
         id: {
-            description: 'Funko ID',
+            description: 'New funko ID',
             type: 'number',
             demandOption: true
         },
         name: {
-            description: 'Funko name',
+            description: 'New funko name',
             type: 'string',
             demandOption: true
         },
         desc: {
-            description: 'Funko description',
+            description: 'New funko description',
             type: 'string',
             demandOption: true
         },
         type: {
-            description: 'Funko type',
+            description: 'New funko type',
             type: 'string',
             demandOption: true
         },
         gender: {
-            description: 'Funko gender',
+            description: 'New funko gender',
             type: 'string',
             demandOption: true
         },
         franchise: {
-            description: 'Funko franchise',
+            description: 'New funko franchise',
             type: 'string',
             demandOption: true
         },
         number: {
-            description: 'Funko number',
+            description: 'New funko number',
             type: 'number',
             demandOption: true
         },
         exclusive: {
-            description: 'Funko exclusivity',
+            description: 'New funko exclusivity',
             type: 'boolean',
             demandOption: true
         },
         caract: {
-            description: 'Funko special caracteristics',
+            description: 'New funko special caracteristics',
             type: 'string',
             demandOption: false
         },
         value: {
-            description: 'Funko value',
+            description: 'New funko value',
             type: 'number',
             demandOption: true
         },
