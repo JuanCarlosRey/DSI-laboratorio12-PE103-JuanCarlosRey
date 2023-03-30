@@ -20,10 +20,8 @@ export class OperableUser extends User {
     addFunko(newFunko: Funko): number {
         if(this._funkoCollection.find(funko => funko.id == newFunko.id) == undefined) {
             this.funkoCollection.push(newFunko);
-            log(chalk.green("Funko añadido correctamente!"));
             return 0;
         } else {
-            log(chalk.red("ERROR: Ya existe un funko con esa ID."));
             return -1;
         }
     }
@@ -37,10 +35,8 @@ export class OperableUser extends User {
         const position = this._funkoCollection.findIndex(funko => funko.id == newFunko.id);
         if(position != -1) {
             this.funkoCollection[position] = newFunko;
-            log(chalk.green("Funko modificado correctamente!"));
             return 0;
         } else {
-            log(chalk.red("ERROR: No existe un funko con esa ID."));
             return -1;
         }
     }
@@ -54,10 +50,8 @@ export class OperableUser extends User {
         const position = this._funkoCollection.findIndex(funko => funko.id == idFunko);
         if(position != -1) {
             this.funkoCollection.splice(position, 1);
-            log(chalk.green("Funko eliminado correctamente!"));
             return 0;
         } else {
-            log(chalk.red("ERROR: No existe un funko con esa ID."));
             return -1;
         }
     }
@@ -119,7 +113,6 @@ export class OperableUser extends User {
             }
             return 0;
         } else {
-            log(chalk.red("ERROR: No existe un funko con esa ID."));
             return -1;
         }
     }
