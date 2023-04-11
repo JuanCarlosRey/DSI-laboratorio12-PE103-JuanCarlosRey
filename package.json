@@ -2,7 +2,7 @@
   "name": "ull-esit-inf-dsi-22-23-prct10-fs-proc-sockets-funko-app-juancarlosrey",
   "version": "1.0.0",
   "description": "",
-  "main": "ejercicio-1/ejercicio1.js",
+  "main": "index.js",
   "type": "commonjs",
   "scripts": {
     "start": "tsc-watch --onSuccess \"node dist/index.js\"",
