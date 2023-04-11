@@ -20,8 +20,8 @@ yargs(hideBin(process.argv))
             type: 'string',
             demandOption: false
         },
-        caracters: {
-            description: 'If user wants to show number of caracters',
+        characters: {
+            description: 'If user wants to show number of characters',
             type: 'string',
             demandOption: false
         },
@@ -39,7 +39,7 @@ yargs(hideBin(process.argv))
                         }
                     })
                     .on('end', function() {
-                        console.log("File has", count, "lines.");
+                        console.log("File has", count - 1, "lines.");
                     })
                     .on('error', (err: { message: string | Uint8Array; }) => {
                         process.stderr.write(err.message);
@@ -63,17 +63,17 @@ yargs(hideBin(process.argv))
                         console.log();
                     });
             }
-            if(argv.caracters !== undefined) {
+            if(argv.characters !== undefined) {
                 let i;
                 let count = 1;
                 fs.createReadStream(argv.filename)
                     .on('data', function(chunk: string | any[]) {
                         for (i = 0; i < chunk.length; ++i) {
-                            if (chunk[i] != 10) count++;
+                            count++;
                         }
                     })
                     .on('end', function() {
-                        console.log("File has", count - 1, "caracters.");
+                        console.log("File has", count - 1, "characters.");
                     })
                     .on('error', (err: { message: string | Uint8Array; }) => {
                         process.stderr.write(err.message);
