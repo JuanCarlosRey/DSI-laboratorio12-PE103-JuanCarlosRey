@@ -195,6 +195,9 @@ yargs(hideBin(process.argv))
     .argv;
 
 let wholeData = '';
+/**
+ * Parámetro con el que el cliente recibe los resultados de la ejecución del comando.
+ */
 client.on('data', (dataChunk) => {
     wholeData += dataChunk;
     const out_message = JSON.parse(wholeData);
