@@ -22,7 +22,7 @@ net.createServer((connection) => {
                 return;
             }
         });
-    })
+    });
 
     connection.on('close', () => {
         console.log('A client has disconnected.');
