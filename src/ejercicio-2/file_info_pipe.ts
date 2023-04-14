@@ -1,9 +1,12 @@
 import yargs from "yargs";
+import chalk from "chalk";
 import { hideBin } from "yargs/helpers";
 import { spawn } from "child_process";
+import { readFile } from "fs";
+
+// Comando para ejecutarlo: node dist/ejercicio-2/file_info_pipe.js show --filename <ruta_fichero> --lines --words --characters
 
 yargs(hideBin(process.argv))
-    // Obtiene el numero de lineas de un fichero.
     .command('show', 'show winfo of a specified file', {
         filename: {
             description: 'Filename',
@@ -27,20 +30,31 @@ yargs(hideBin(process.argv))
         },
     }, (argv) => {
         if(argv.filename.length <= 3) {
-            console.log("Please, specify a file!")
+            console.log(chalk.red("Please, specify a file!"));
         } else {
-            if(argv.lines !== undefined) {
-                const wc = spawn('wc', ['-l', argv.filename]);
-                wc.stdout.pipe(process.stdout);
-            }
-            if(argv.words !== undefined) {
-                const wc = spawn('wc', ['-w', argv.filename]);
-                wc.stdout.pipe(process.stdout);
-            }
-            if(argv.characters !== undefined) {
-                const wc = spawn('wc', ['-m', argv.filename]);
-                wc.stdout.pipe(process.stdout);
-            }
+            readFile(argv.filename, (err) => {
+                if(err) {
+                    console.log(chalk.red(`The file ${argv.filename} does not exist.`));
+                } else {
+                    const cat = spawn('cat', [argv.filename]);
+                    const wc = spawn('wc');
+
+                    cat.stdout.pipe(wc.stdin);
+
+                    wc.stdout.on('data', (data) => {
+                        const wcOutput = data.toString().split(/\s+/);
+                        if(argv.lines !== undefined) {
+                            console.log(`File ${argv.filename} has ${chalk.yellow(wcOutput[1].trim())} lines.`);
+                        }
+                        if(argv.words !== undefined) {
+                            console.log(`File ${argv.filename} has ${chalk.yellow(wcOutput[2].trim())} words.`);
+                        }
+                        if(argv.characters !== undefined) {
+                            console.log(`File ${argv.filename} has ${chalk.yellow(wcOutput[3].trim())} characters.`);
+                        }
+                    });
+                }
+            });
         }
     })
     .help()

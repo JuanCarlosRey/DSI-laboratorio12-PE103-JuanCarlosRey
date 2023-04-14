@@ -1,9 +1,12 @@
 import yargs from "yargs";
+import chalk from "chalk";
 import { hideBin } from "yargs/helpers";
-import fs from 'fs';
+import { spawn } from "child_process";
+import { readFile } from "fs";
+
+// Comando para ejecutarlo: node dist/ejercicio-2/file_info.js show --filename <ruta_fichero> --lines --words --characters
 
 yargs(hideBin(process.argv))
-    // Obtiene el numero de lineas de un fichero.
     .command('show', 'show winfo of a specified file', {
         filename: {
             description: 'Filename',
@@ -27,59 +30,31 @@ yargs(hideBin(process.argv))
         },
     }, (argv) => {
         if(argv.filename.length <= 3) {
-            console.log("Please, specify a file!")
+            console.log(chalk.red("Please, specify a file!"));
         } else {
-            if(argv.lines !== undefined) {
-                let i;
-                let count = 1;
-                fs.createReadStream(argv.filename)
-                    .on('data', function(chunk: string | any[]) {
-                        for (i = 0; i < chunk.length; ++i) {
-                            if (chunk[i] == 10) count++;
+            readFile(argv.filename, (err) => {
+                if(err) {
+                    console.log(chalk.red(`The file ${argv.filename} does not exist.`));
+                } else {
+                    const wc = spawn('wc', [argv.filename]);
+
+                    let wcOutput = '';
+                    wc.stdout.on('data', (piece) => wcOutput += piece);
+
+                    wc.on('close', () => {
+                        const wcOutputAsArray = wcOutput.split(/\s+/);
+                        if(argv.lines !== undefined) {
+                            console.log(`File helloworld.txt has ${chalk.yellow(wcOutputAsArray[1])} lines`);
                         }
-                    })
-                    .on('end', function() {
-                        console.log("File has", count - 1, "lines.");
-                    })
-                    .on('error', (err: { message: string | Uint8Array; }) => {
-                        process.stderr.write(err.message);
-                        console.log();
-                    });
-            }
-            if(argv.words !== undefined) {
-                let i;
-                let count = 1;
-                fs.createReadStream(argv.filename)
-                    .on('data', function(chunk: string | any[]) {
-                        for (i = 0; i < chunk.length; ++i) {
-                            if (chunk[i] == 32 || chunk[i] == 10) count++;
+                        if(argv.words !== undefined) {
+                            console.log(`File helloworld.txt has ${chalk.yellow(wcOutputAsArray[2])} words`);
                         }
-                    })
-                    .on('end', function() {
-                        console.log("File has", count, "words.");
-                    })
-                    .on('error', (err: { message: string | Uint8Array; }) => {
-                        process.stderr.write(err.message);
-                        console.log();
-                    });
-            }
-            if(argv.characters !== undefined) {
-                let i;
-                let count = 1;
-                fs.createReadStream(argv.filename)
-                    .on('data', function(chunk: string | any[]) {
-                        for (i = 0; i < chunk.length; ++i) {
-                            count++;
+                        if(argv.characters !== undefined) {
+                            console.log(`File helloworld.txt has ${chalk.yellow(wcOutputAsArray[3])} characters`);
                         }
-                    })
-                    .on('end', function() {
-                        console.log("File has", count - 1, "characters.");
-                    })
-                    .on('error', (err: { message: string | Uint8Array; }) => {
-                        process.stderr.write(err.message);
-                        console.log();
                     });
-            }
+                }
+            });
         }
     })
     .help()
