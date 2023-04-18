@@ -1,4 +1,4 @@
-name: P10 - SonarCloud 
+name: P11 - SonarCloud 
 on:
   push:
     branches: [ main ]
