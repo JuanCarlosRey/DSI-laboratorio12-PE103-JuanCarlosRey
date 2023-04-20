@@ -1,6 +1,6 @@
 import "mocha";
 import { expect } from "chai";
-import { Funko, Types } from "../src/ejercicio-3/funko";
+import { Funko, Types } from "../src/funko-server/funko";
 
 describe("Class Funko", () => {
     const funko_1 = new Funko(1, "Iron Man", "Funko de Iron Man", Types.Pop, "Película", "Marvel", 14, false, "", 15);

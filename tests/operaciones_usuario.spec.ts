@@ -1,7 +1,7 @@
 import "mocha";
 import { expect } from "chai";
-import { Funko, Types } from "../src/ejercicio-3/funko";
-import { OperableUser } from "../src/ejercicio-3/operaciones_usuario";
+import { Funko, Types } from "../src/funko-server/funko";
+import { OperableUser } from "../src/funko-server/operaciones_usuario";
 
 describe("Class UserOperations", () => {
     const funko_1 = new Funko(1, "Iron Man", "Funko de Iron Man", Types.Pop, "Película", "Marvel", 14, false, "", 15);
