@@ -19,9 +19,9 @@ server.get('/execmd', (req, res) => {
 
     exec(`${req.query.cmd} ${args}`, (error, stdout, stderr) => {
         if(error) {
-            return res.status(500).send(JSON.stringify({'type': 'error', 'output': stderr}) + '\n');
+            return res.status(500).send(JSON.stringify({'type': 'error', 'output': stderr}) + '\n').end();
         } else {
-            return res.send(JSON.stringify({'type': 'error', 'output': stdout}) + '\n');
+            return res.send(JSON.stringify({'type': 'success', 'output': stdout}) + '\n').end();
         }
     });
 
@@ -31,7 +31,7 @@ server.get('/execmd', (req, res) => {
 /**
  * Ruta no válida.
  */
-server.get('', (_, res) => {
+server.get('*', (_, res) => {
     res.status(404).end();
 });
 
