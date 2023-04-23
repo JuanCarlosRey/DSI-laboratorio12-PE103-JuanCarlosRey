@@ -13,9 +13,8 @@ Antes de realizar los ejercicios solicitado, primero se ha realizado una serie d
 - Instalar [Mocha](https://mochajs.org) y [Chai](https://www.chaijs.com) para la realización de tests unitarios.
 - Instalar [Istanbul](https://istanbul.js.org) y [Coveralls](https://coveralls.io) para el cubrimiento del código.
 - Activar las [**GitHub Actions**](https://docs.github.com/en/actions) tanto para las [pruebas](https://drive.google.com/file/d/1hwtPovQlGvthaE7e7yYshC4v8rOtLSw0/view?usp=sharing) como para el [cubrimiento](https://drive.google.com/file/d/1yOonmpVbOyvzx3ZbXMQTAPxvA3a7AE7w/view?usp=sharing) y la calidad de códgio ([Sonar Cloud](https://sonarcloud.io/projects)).
-- Instalar los paquetes [Chalk](https://www.npmjs.com/package/chalk) para imprimir en color, [Yargs](https://www.npmjs.com/package/yargs) para ejecutar la app mediante comandos y parámetros, y la [API sincrona de Node.js](https://nodejs.org/docs/latest-v19.x/api/fs.html) para la persistencia de los datos de la app.
-- Leer los [apuntes de la asignatura](https://ull-esit-inf-dsi-2223.github.io/nodejs-theory/) relacionados con la creación de ficheros y sockets.
-- Leer los apuntes de la asignatura sobre [peticiones HTTP y patrones call-back](https://ull-esit-inf-dsi-2223.github.io/nodejs-theory/nodejs-http-callback-pattern.html).
+- Instalar la [API sincrona de Node.js](https://nodejs.org/docs/latest-v19.x/api/fs.html) para la persistencia de los datos de la app.
+- Leer los apuntes de la asignatura sobre [peticiones HTTP y patrones call-back](https://ull-esit-inf-dsi-2223.github.io/nodejs-theory/nodejs-http-callback-pattern.html) y sobre [creación de servidores web a través de Express](https://ull-esit-inf-dsi-2223.github.io/nodejs-theory/nodejs-express.html).
 
 ## Ejercicios
 
